@@ -14,6 +14,7 @@ from pathlib import Path
 import dj_database_url
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'auth_user',
     'task',
     'session',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +95,10 @@ REST_FRAMEWORK = {
     ),
 }
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  # Access token valid for 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Refresh token valid for 7 days
+}
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 

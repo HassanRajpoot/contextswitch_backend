@@ -8,6 +8,8 @@ from .serializers import RegisterSerializer, LoginSerializer
 
 
 class RegisterView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -27,6 +29,7 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)

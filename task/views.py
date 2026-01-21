@@ -8,9 +8,11 @@ class TaskViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Task.objects.none()
         # Only return tasks belonging to logged-in user
         return Task.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         # Automatically attach logged-in user
-        serializer.save()
+        serializer.save(user=self.request.user)
